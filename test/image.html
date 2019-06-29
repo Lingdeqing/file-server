@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <form action="http://47.52.42.134:23000/api/media/pic/upload" method="post" enctype="multipart/form-data">
+    <form action="http://www.yaolin.win:23000/api/media/pic/upload" method="post" enctype="multipart/form-data">
+        form标签上传：
         <input type="file" name="file" />
-        <input type="submit" name="file" value="submit"/>
-      </form>
+        <input type="submit" name="file" value="submit" />
+        <br /><br />
+    </form>
+
+    <div>
+        ajax上传：
+        <input type="file" id="ajax" />,
+        进度： <span id="progress">0</span>%
+        
+    </div>
+    <script type="text/javascript">
+    document.querySelector('#ajax').addEventListener('change', function(e){
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        const xhr = new XMLHttpRequest();
+        xhr.upload.onprogress = function(){
+            document.querySelector('#progress').innerHTML = (event.loaded / event.total * 100 | 0);
+        }
+        xhr.onload = function(){
+            if(xhr.status == 200){
+                alert('上传成功');
+            } else {
+                alert('上传失败');
+            }
+        }
+        xhr.open('POST', '/api/media/pic/upload');
+        xhr.send(formData);
+    })
+    </script>
 </body>
+
 </html>
