@@ -23,7 +23,8 @@ function cors() {
   }
 }
 
-app.post("/api/media/pic/upload", cors(), upload.single("file"), function (req, res, next) {
+app.all('/api/media/pic/upload', cors());
+app.post("/api/media/pic/upload", upload.single("file"), function (req, res, next) {
   if (!req.file) {
     res.status(200);
     res.json({
