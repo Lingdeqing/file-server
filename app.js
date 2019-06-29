@@ -43,7 +43,7 @@ app.post("/api/media/pic/upload", cors(), upload.single("file"), function (req, 
       res.json({
         code: 0,
         msg: 'ok',
-        data: `http://localhost:3000/images/${path.basename(filepath)}`
+        data: `http://http://www.yaolin.win:${port}/images/${path.basename(filepath)}`
       })
     }
   });
